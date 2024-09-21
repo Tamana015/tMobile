@@ -1,0 +1,232 @@
+const plansData = {
+    plans: {
+      prepaid: {
+        basicDataPlans: [
+          {
+            price: 199,
+            data: '1GB/day',
+            validity: '28 days',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Includes access to Jio apps.',
+          },
+          {
+            price: 399,
+            data: '3GB/day',
+            validity: '84 days',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Includes additional data for Jio apps.',
+          },
+          {
+            price: 599,
+            data: '2GB/day',
+            validity: '56 days',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Extended validity plan with extra data.',
+          },
+        ],
+        jioPhonePlans: [
+          {
+            price: 75,
+            data: '0.5GB/day',
+            validity: '28 days',
+            voiceCalls: 'Unlimited',
+            sms: 'Limited',
+            specialNote: 'Designed for JioPhone users.',
+          },
+          {
+            price: 125,
+            data: '1GB/day',
+            validity: '28 days',
+            voiceCalls: 'Unlimited',
+            sms: 'Limited',
+            specialNote: 'Includes Jio apps subscription.',
+          },
+          {
+            price: 155,
+            data: '1.5GB/day',
+            validity: '28 days',
+            voiceCalls: 'Unlimited',
+            sms: 'Limited',
+            specialNote: 'Higher data limit for JioPhone users.',
+          },
+        ],
+        dataAddOnPacks: [
+          {
+            price: 11,
+            data: '1GB',
+            validity: 'Valid till base plan’s validity',
+            specialNote: 'Additional data for existing plans.',
+          },
+          {
+            price: 301,
+            data: '5GB',
+            validity: 'Valid till base plan’s validity',
+            specialNote: 'For heavy data users.',
+          },
+          {
+            price: 551,
+            data: '10GB',
+            validity: 'Valid till base plan’s validity',
+            specialNote: 'High data requirement add-on.',
+          },
+        ],
+        isdRoamingPacks: [
+          {
+            price: 575,
+            data: '1GB',
+            validity: '1 day',
+            voiceCalls: 'Incoming and outgoing rates apply',
+            specialNote: 'Rates vary by country.',
+          },
+          {
+            price: 5000,
+            data: '10GB',
+            validity: '30 days',
+            voiceCalls: 'Incoming and outgoing rates apply',
+            specialNote: 'Includes more data for long-term stays.',
+          },
+          {
+            price: 10000,
+            data: '20GB',
+            validity: '30 days',
+            voiceCalls: 'Incoming and outgoing rates apply',
+            specialNote: 'Premium plan for extensive international usage.',
+          },
+        ],
+      },
+      postpaid: {
+        basicPostpaidPlans: [
+          {
+            price: 399,
+            data: '30GB',
+            validity: 'Monthly',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Includes Netflix subscription.',
+          },
+          {
+            price: 799,
+            data: '100GB',
+            validity: 'Monthly',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Includes Amazon Prime subscription.',
+          },
+          {
+            price: 999,
+            data: '150GB',
+            validity: 'Monthly',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Includes additional benefits like international calling.',
+          },
+        ],
+        premiumPostpaidPlans: [
+          {
+            price: 1199,
+            data: '150GB',
+            validity: 'Monthly',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Includes international roaming benefits.',
+          },
+          {
+            price: 2499,
+            data: '300GB',
+            validity: 'Monthly',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Premium benefits and higher data limits.',
+          },
+          {
+            price: 3499,
+            data: '500GB',
+            validity: 'Monthly',
+            voiceCalls: 'Unlimited',
+            sms: '100 SMS/day',
+            specialNote: 'Top-tier plan with extensive data and premium services.',
+          },
+        ],
+      },
+      topUpAndAddOnPacks: [
+        {
+          price: 10,
+          type: 'Top-Up',
+          amount: '₹10',
+          specialNote: 'For additional talk time.',
+        },
+        {
+          price: 1000,
+          type: 'Top-Up',
+          amount: '₹1000',
+          specialNote: 'For larger balance additions.',
+        },
+        {
+          price: 500,
+          type: 'Add-On',
+          amount: '₹500',
+          specialNote: 'For data or talk time additions as needed.',
+        },
+      ],
+      specialPromotionalPlans: [
+        {
+          price: 299,
+          data: '2GB/day',
+          validity: '30 days',
+          voiceCalls: 'Unlimited',
+          sms: '100 SMS/day',
+          specialNote: 'Limited-time offer.',
+        },
+        {
+          price: 499,
+          data: '3GB/day',
+          validity: '60 days',
+          voiceCalls: 'Unlimited',
+          sms: '100 SMS/day',
+          specialNote: 'Seasonal promotional plan with extra data.',
+        },
+      ],
+      smartphonePlans: [
+        {
+          price: 899,
+          data: '2GB/day',
+          validity: '56 days',
+          voiceCalls: 'Unlimited',
+          sms: '100 SMS/day',
+          specialNote: 'Includes smartphone protection insurance.',
+        },
+        {
+          price: 1199,
+          data: '3GB/day',
+          validity: '84 days',
+          voiceCalls: 'Unlimited',
+          sms: '100 SMS/day',
+          specialNote: 'Higher data limit with extended validity and smartphone benefits.',
+        },
+      ],
+      trueUnlimitedUpgrades: [
+        {
+          price: 599,
+          data: 'Unlimited',
+          validity: '30 days',
+          voiceCalls: 'Unlimited',
+          sms: '100 SMS/day',
+          specialNote: 'Upgrade to true unlimited data for a month.',
+        },
+        {
+          price: 1199,
+          data: 'Unlimited',
+          validity: '90 days',
+          voiceCalls: 'Unlimited',
+          sms: '100 SMS/day',
+          specialNote: 'Extended true unlimited data plan.',
+        },
+      ],
+    },
+  };
+  
+  export default plansData;
+  
