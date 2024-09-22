@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { Client } from '@stomp/stompjs';
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { getParentCart } from '../../api/apiService';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import Header from '../../components/headerBar/Header';
 
 const SOCKET_URL = 'ws://localhost:8080/ws-message';
-const API_URL = 'https://example.com/api/cart'; 
 
 const ParentCart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [client, setClient] = useState(null);
-  const [loading, setLoading]= useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const route = useRoute();
+  const { userData } = route.params;
   const navigation = useNavigation();
 
-  const getPartCartApi = async() => {
-    setLoading(true);
-    console.error("id is ", userData.userDetails.cart.id);
-    const response = await getParentCart({parentCartId : userData.userDetails.cart.id})
-    console.log("dhjghgdfhjdfhdhjf ",response);
-    setCartItems(response.devicePlanList);
-    setLoading(false);
-  }
+  const getPartCartApi = async () => {
+    try {
+      const response = await getParentCart({ parentCartId: userData.userDetails.cart.id });
+      console.log("API Response: ", response);
+      setCartItems(response.cartList);
+    } catch (error) {
+      console.error("Error fetching parent cart: ", error);
+    }
+  };
+
   useEffect(() => {
-      getPartCartApi();
     const stompClient = new Client({
       brokerURL: SOCKET_URL,
       reconnectDelay: 5000,
@@ -60,39 +62,47 @@ const ParentCart = () => {
     };
   }, []);
 
-  const fetchCartData = async () => {
-    try {
-      const response = await axios.get(API_URL);
-      setCartItems(response.data);
-    } catch (error) {
-      console.error("Error fetching cart data:", error);
-    }
-  };
-
-  const addItemToCart = (item) => {
-    const updatedCart = [...cartItems, item];
-    setCartItems(updatedCart);
-    notifyCartUpdate(updatedCart);
-  };
-
-  const notifyCartUpdate = (updatedCart) => {
-    if (client && client.connected) {
-      client.publish({
-        destination: '/topic/cart',
-        body: JSON.stringify(updatedCart),
-      });
-    }
-  };
-
   useEffect(() => {
-    fetchCartData();
+    getPartCartApi(); // Call the API once on component mount
+
+    const interval = setInterval(() => {
+      getPartCartApi(); // Call the API every 5 seconds
+    }, 5000);
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.itemTitle}>User ID: {item.id}</Text>
+      <Text>Devices:</Text>
+      <FlatList
+        data={item.devicePlanList}
+        renderItem={({ item: device }) => (
+          <Text style={styles.item}>{device.name || 'Unnamed Device'}</Text>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+      <Text>Recharge Plans:</Text>
+      <FlatList
+        data={item.rechargePlanList}
+        renderItem={({ item: plan }) => (
+          <Text style={styles.item}>{plan.name || 'Unnamed Plan'}</Text>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      {loading && <LoadingIndicator/>}
-       <Header navigation={navigation} title="YOUR CART" noCart="false" />
-      <Button title="Add Item" onPress={() => addItemToCart("New Item")} />
+      <Header navigation={navigation} title="YOUR SHARED CART" noCart="false" />
+      <FlatList
+        data={cartItems}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      />
     </View>
   );
 };
@@ -100,18 +110,24 @@ const ParentCart = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
     backgroundColor: '#f5f5f5',
   },
-  title: {
-    fontSize: 24,
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 10,
     marginBottom: 20,
+    elevation: 3,
+  },
+  itemTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
   },
   item: {
-    fontSize: 18,
-    padding: 10,
+    fontSize: 16,
+    padding: 5,
   },
 });
 

@@ -77,12 +77,12 @@ console.log("==================",formattedDate);
       // ];
       // console.log("exit herer")
       //await NfcManager.setNdefMessage(ndefMessage);
-      Alert.alert("NFC Ready", "Share your Cart ID via Link shared on you email id !");
+      Alert.alert("NFC Ready", "Shared your Cart via Link sent on your email id !");
     } catch (ex) {
       console.warn(ex);
       Alert.alert("NFC Error", "An error occurred while trying to share via NFC.",ex);
     } finally {
-       navigation.navigate('ParentCart')
+       navigation.navigate('ParentCart',{userData:userData})
     }
   };
 

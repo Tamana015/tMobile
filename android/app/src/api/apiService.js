@@ -109,7 +109,7 @@ export const loginUser = async (loginData) => {
       console.log(response.data);
       return response.data; 
     } catch (error) {
-      console.error("Error during get cart fetch:", error);
+      console.error("Error during get parent cart fetch:", error);
       return {error: error};
     }
   }
