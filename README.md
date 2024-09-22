@@ -1,7 +1,13 @@
 Hello! We’re excited to share that we are part of Chhallang 3.0, where we tackled the DTDL problem and secured **first** place! 🎉
 
-Feel free to check out our presentation here: Presentation Link - **https://docs.google.com/presentation/d/1d-T9RWFszLuKsmUSJoId2RlxmAoxpgPpp0_RuiT7rQE/edit?usp=sharing**.
-and this is UI - **https://drive.google.com/drive/folders/1kWvbUTADOtgIZSgLMZfky9lOat9IoR5g?usp=sharing**
+Feel free to check out our app details here: 
+
+Presentation Link - **https://docs.google.com/presentation/d/1d-T9RWFszLuKsmUSJoId2RlxmAoxpgPpp0_RuiT7rQE/edit?usp=sharing**.
+
+UI - **https://drive.google.com/drive/folders/1kWvbUTADOtgIZSgLMZfky9lOat9IoR5g?usp=sharing**
+
+Backend Code link - **https://github.com/Tamana015/tMobileBackendCode**
+
 Thank you!
 
 
