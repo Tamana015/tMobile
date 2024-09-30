@@ -1,5 +1,7 @@
 Hello! We’re excited to share that we are part of Chhallang 3.0, where we tackled the DTDL problem and secured **first** place! 🎉
 
+**https://www.hackerearth.com/challenges/hackathon/chhalaang-grand-finale-3/**
+
 Feel free to check out our app details here: 
 
 Presentation Link - **https://docs.google.com/presentation/d/1d-T9RWFszLuKsmUSJoId2RlxmAoxpgPpp0_RuiT7rQE/edit?usp=sharing**.
